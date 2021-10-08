@@ -17,9 +17,14 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import AvatarComponent from "avataaars";
+import {Avatar} from "@mui/material";
+import {RandomAvatar} from "./RandomAvatar";
 
 const drawerWidth = 240;
 
@@ -44,7 +49,6 @@ const AppBar = styled(MuiAppBar, {
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     '& .MuiDrawer-paper': {
-      position: 'relative',
       whiteSpace: 'nowrap',
       width: drawerWidth,
       transition: theme.transitions.create('width', {
@@ -53,7 +57,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
       }),
       boxSizing: 'border-box',
       ...(!open && {
-        overflowX: 'hidden',
+        overflowX: 'auto',
         transition: theme.transitions.create('width', {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
@@ -74,6 +78,9 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const avaiableVoices = speechSynthesis.getVoices()
+  console.log('voices are ', avaiableVoices)
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -113,23 +120,29 @@ function DashboardContent() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
+        <Drawer
+            open={open}
+            variant="permanent"
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
             }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
+            open
+        >
           <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List>{secondaryListItems}</List>
+          <List>
+            {avaiableVoices.map((voice) => <>
+            <ListItem onClick={() => (console.log('Clicked!'))}>
+              <ListItemIcon>
+               <Avatar>
+                <RandomAvatar seed={new Buffer(voice.name).toString('hex')}/>
+               </Avatar>
+              </ListItemIcon>
+              <ListItemText primary={voice.name}/>
+            </ListItem>
+              <Divider/>
+            </>)}
+          </List>
         </Drawer>
         <Box
           component="main"
@@ -140,33 +153,33 @@ function DashboardContent() {
                 : theme.palette.grey[900],
             flexGrow: 1,
             height: '100vh',
-            overflow: 'auto',
+            // overflow: 'auto',
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid>
-          </Container>
+          {/*<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>*/}
+          {/*  <Grid container spacing={3}>*/}
+          {/*    /!* Recent Deposits *!/*/}
+          {/*    <Grid item xs={12} md={4} lg={3}>*/}
+          {/*      <Paper*/}
+          {/*        sx={{*/}
+          {/*          p: 2,*/}
+          {/*          display: 'flex',*/}
+          {/*          flexDirection: 'column',*/}
+          {/*          height: 240,*/}
+          {/*        }}*/}
+          {/*      >*/}
+          {/*        <Deposits />*/}
+          {/*      </Paper>*/}
+          {/*    </Grid>*/}
+          {/*    /!* Recent Orders *!/*/}
+          {/*    <Grid item xs={12}>*/}
+          {/*      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>*/}
+          {/*        <Orders />*/}
+          {/*      </Paper>*/}
+          {/*    </Grid>*/}
+          {/*  </Grid>*/}
+          {/*</Container>*/}
         </Box>
       </Box>
     </ThemeProvider>
