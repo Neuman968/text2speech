@@ -133,7 +133,7 @@ function DashboardContent() {
           <Divider />
           <List>
             {avaiableVoices.map((voice) => <>
-            <ListItem onClick={() => (console.log('Clicked!'))}>
+            <ListItem onClick={() => (setSelectedVoice(voice))}>
               <ListItemIcon>
                <Avatar>
                 <RandomAvatar seed={new Buffer(voice.name).toString('hex')}/>
@@ -169,7 +169,9 @@ function DashboardContent() {
           >
           <Card>
             <CardHeader
-                title={`Speaking as ${selectedVoice.name}`}
+                avatar={
+                  <RandomAvatar seed={new Buffer(selectedVoice.name).toString('hex')}/>
+                }
             />
             <CardContent>
               Speaking as {selectedVoice.name}
