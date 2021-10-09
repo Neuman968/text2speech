@@ -23,7 +23,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import AvatarComponent from "avataaars";
-import {Avatar} from "@mui/material";
+import {Avatar, Card, CardContent, CardHeader} from "@mui/material";
 import {RandomAvatar} from "./RandomAvatar";
 
 const drawerWidth = 240;
@@ -80,7 +80,8 @@ function DashboardContent() {
   };
 
   const avaiableVoices = speechSynthesis.getVoices()
-  console.log('voices are ', avaiableVoices)
+
+  const [ selectedVoice, setSelectedVoice ] = React.useState(avaiableVoices[0])
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -157,29 +158,24 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          {/*<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>*/}
-          {/*  <Grid container spacing={3}>*/}
-          {/*    /!* Recent Deposits *!/*/}
-          {/*    <Grid item xs={12} md={4} lg={3}>*/}
-          {/*      <Paper*/}
-          {/*        sx={{*/}
-          {/*          p: 2,*/}
-          {/*          display: 'flex',*/}
-          {/*          flexDirection: 'column',*/}
-          {/*          height: 240,*/}
-          {/*        }}*/}
-          {/*      >*/}
-          {/*        <Deposits />*/}
-          {/*      </Paper>*/}
-          {/*    </Grid>*/}
-          {/*    /!* Recent Orders *!/*/}
-          {/*    <Grid item xs={12}>*/}
-          {/*      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>*/}
-          {/*        <Orders />*/}
-          {/*      </Paper>*/}
-          {/*    </Grid>*/}
-          {/*  </Grid>*/}
-          {/*</Container>*/}
+          <Container
+              maxWidth="lg"
+              sx={{
+                mt: 4,
+                mb: 4,
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+          >
+          <Card>
+            <CardHeader
+                title={`Speaking as ${selectedVoice.name}`}
+            />
+            <CardContent>
+              Speaking as {selectedVoice.name}
+            </CardContent>
+          </Card>
+          </Container>
         </Box>
       </Box>
     </ThemeProvider>
