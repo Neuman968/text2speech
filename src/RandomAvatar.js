@@ -8,15 +8,15 @@ const Avataaar = props => (
     />
 )
 
-export const RandomAvatar = ({seed}) => {
-    const items = seed.match(/.{1,2}/g).map(e => parseInt(e, 16))
+export const RandomAvatar = (props) => {
+    const items = props.seed.match(/.{1,2}/g).map(e => parseInt(e, 16))
     const options = { }
     const keys = [...configsKeys]
 
     keys.map((e, i) => Object.assign(options, {[e]: configs[e][items[i] % configs[e].length]}))
 
     return (
-        <Avataaar {...options} />
+        <Avataaar {...options} {...props}/>
     )
 }
 

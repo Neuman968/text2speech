@@ -23,7 +23,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import AvatarComponent from "avataaars";
-import {Avatar, Card, CardContent, CardHeader} from "@mui/material";
+import {Avatar, Button, Card, CardContent, CardHeader, TextareaAutosize} from "@mui/material";
 import {RandomAvatar} from "./RandomAvatar";
 
 const drawerWidth = 240;
@@ -83,6 +83,14 @@ function DashboardContent() {
 
   const [ selectedVoice, setSelectedVoice ] = React.useState(avaiableVoices[0])
 
+  const [ message, setMessage ] = React.useState('')
+
+  const speak = () => {
+      const utterance = new SpeechSynthesisUtterance(message)
+      utterance.voice = selectedVoice
+      speechSynthesis.speak(utterance)
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -112,13 +120,8 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Text To Speech
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -169,15 +172,47 @@ function DashboardContent() {
           >
           <Card>
             <CardHeader
+                align="center"
                 avatar={
-                  <RandomAvatar seed={new Buffer(selectedVoice.name).toString('hex')}/>
+                  <RandomAvatar
+                      style={{
+                          height: '160px',
+                          width: '160px',
+                          justifyContent: 'center',
+                      }}
+                      seed={new Buffer(selectedVoice.name).toString('hex')}
+                  />
                 }
             />
             <CardContent>
-              Speaking as {selectedVoice.name}
+              <Typography align="center">
+                  Speaking as {selectedVoice.name}
+              </Typography>
             </CardContent>
           </Card>
           </Container>
+            <Container
+                maxWidth="lg"
+                sx={{
+                    mt: 4,
+                    mb: 4,
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <Card>
+                    <CardContent>
+                        <TextareaAutosize
+                            minRows={10}
+                            onChange={(e) => setMessage(e.target.value)}
+                            style={{ width: 600 }}
+                        />
+                        <Button
+                            onClick={() => speak()}
+                        >Speak</Button>
+                    </CardContent>
+                </Card>
+            </Container>
         </Box>
       </Box>
     </ThemeProvider>
