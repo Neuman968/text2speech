@@ -23,6 +23,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import AvatarComponent from "avataaars";
+import SpeakCard from "./SpeakCard";
 import {Avatar, Button, Card, CardContent, CardHeader, TextareaAutosize} from "@mui/material";
 import {RandomAvatar} from "./RandomAvatar";
 
@@ -73,23 +74,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
+const avaiableVoices = speechSynthesis.getVoices()
+
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const avaiableVoices = speechSynthesis.getVoices()
-
   const [ selectedVoice, setSelectedVoice ] = React.useState(avaiableVoices[0])
 
-  const [ message, setMessage ] = React.useState('')
-
-  const speak = () => {
-      const utterance = new SpeechSynthesisUtterance(message)
-      utterance.voice = selectedVoice
-      speechSynthesis.speak(utterance)
-  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -200,18 +194,7 @@ function DashboardContent() {
                     justifyContent: 'center',
                 }}
             >
-                <Card>
-                    <CardContent>
-                        <TextareaAutosize
-                            minRows={10}
-                            onChange={(e) => setMessage(e.target.value)}
-                            style={{ width: 600 }}
-                        />
-                        <Button
-                            onClick={() => speak()}
-                        >Speak</Button>
-                    </CardContent>
-                </Card>
+                <SpeakCard voice={selectedVoice}/>
             </Container>
         </Box>
       </Box>
