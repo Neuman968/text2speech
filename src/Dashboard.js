@@ -17,6 +17,8 @@ import ListItemText from '@mui/material/ListItemText';
 import SpeakCard from "./SpeakCard";
 import {Avatar, Card, CardContent, CardHeader} from "@mui/material";
 import {RandomAvatar} from "./RandomAvatar";
+import FlagIcon from "./FlagIcon";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 
 const drawerWidth = 240;
 
@@ -129,6 +131,9 @@ function DashboardContent() {
                   primary={voice.name}
                   secondary={voice.lang}
               />
+              <ListItemAvatar>
+                  <FlagIcon lang={voice.lang}/>
+              </ListItemAvatar>
             </ListItem>
               <Divider/>
             </>)}
