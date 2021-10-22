@@ -75,7 +75,6 @@ function DashboardContent() {
 
   const [ selectedVoice, setSelectedVoice ] = React.useState(avaiableVoices[0])
 
-
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -116,7 +115,6 @@ function DashboardContent() {
               display: { xs: 'none', sm: 'block' },
               '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
             }}
-            open
         >
           <Divider />
           <List>
@@ -127,7 +125,10 @@ function DashboardContent() {
                 <RandomAvatar seed={new Buffer(voice.name).toString('hex')}/>
                </Avatar>
               </ListItemIcon>
-              <ListItemText primary={voice.name}/>
+              <ListItemText
+                  primary={voice.name}
+                  secondary={voice.lang}
+              />
             </ListItem>
               <Divider/>
             </>)}
