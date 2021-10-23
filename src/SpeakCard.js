@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button, Card, CardContent, TextareaAutosize} from "@mui/material";
+import Box from "@mui/material/Box";
 
 function SpeakCard({voice}) {
 
@@ -25,14 +26,17 @@ function SpeakCard({voice}) {
 
     return (<Card>
         <CardContent>
-            <TextareaAutosize
-                minRows={10}
-                onChange={(e) => setMessage(e.target.value)}
-                style={{width: 600}}
-            />
-            <Button
-                onClick={() => speak(message)}
-            >Speak</Button>
+            <Box display="flex" flexDirection={'column'}>
+                <TextareaAutosize
+                    minRows={10}
+                    onChange={(e) => setMessage(e.target.value)}
+                    style={{width: 600}}
+                />
+                <Button
+                    variant="contained"
+                    onClick={() => speak(message)}
+                >Speak</Button>
+            </Box>
         </CardContent>
     </Card>)
 }
