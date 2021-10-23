@@ -69,6 +69,8 @@ const mdTheme = createTheme();
 
 const avaiableVoices = speechSynthesis.getVoices()
 
+const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
+
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -124,7 +126,7 @@ function DashboardContent() {
             <ListItem onClick={() => (setSelectedVoice(voice))}>
               <ListItemIcon>
                <Avatar>
-                <RandomAvatar seed={new Buffer(voice.name).toString('hex')}/>
+                <RandomAvatar seed={computeHexSeed(voice.name)}/>
                </Avatar>
               </ListItemIcon>
               <ListItemText
@@ -171,7 +173,7 @@ function DashboardContent() {
                           width: '160px',
                           justifyContent: 'center',
                       }}
-                      seed={new Buffer(selectedVoice.name).toString('hex')}
+                      seed={computeHexSeed(selectedVoice.name)}
                   />
                 }
             />
