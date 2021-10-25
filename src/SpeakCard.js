@@ -2,7 +2,7 @@ import React from 'react'
 import {Button, Card, CardContent, TextareaAutosize} from "@mui/material";
 import Box from "@mui/material/Box";
 
-function SpeakCard({voice}) {
+function SpeakCard({ voice }) {
 
     const [message, setMessage] = React.useState('')
 

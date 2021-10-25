@@ -65,8 +65,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const mdTheme = createTheme();
-
 const avaiableVoices = speechSynthesis.getVoices()
 
 const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
@@ -80,7 +78,6 @@ function DashboardContent() {
   const [ selectedVoice, setSelectedVoice ] = React.useState(avaiableVoices[0])
 
   return (
-    <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -197,7 +194,6 @@ function DashboardContent() {
             </Container>
         </Box>
       </Box>
-    </ThemeProvider>
   );
 }
 
