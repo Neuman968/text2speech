@@ -1,6 +1,6 @@
 import Dashboard from "./Dashboard";
 import * as React from 'react';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
