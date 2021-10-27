@@ -18,6 +18,8 @@ import {Avatar, Card, CardContent, CardHeader} from "@mui/material";
 import {RandomAvatar} from "./RandomAvatar";
 import FlagIcon from "./FlagIcon";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
+import InfoIcon from '@mui/icons-material/Info';
+import InfoModal from "./InfoModal";
 
 const drawerWidth = 240;
 
@@ -26,7 +28,12 @@ const avaiableVoices = speechSynthesis.getVoices()
 const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
 
 function DashboardContent() {
+
     const [open, setOpen] = React.useState(true);
+
+
+    const [ infoOpen, setInfoOpen ] = React.useState(false)
+
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -36,7 +43,7 @@ function DashboardContent() {
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <MuiAppBar position="absolute" open={open}>
+            <MuiAppBar position="fixed" open={open}>
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -54,20 +61,38 @@ function DashboardContent() {
                         component="h1"
                         variant="h6"
                         color="inherit"
-                        align={"center"}
                         noWrap
-                        sx={{flexGrow: 1}}
+                        style={{
+                            paddingLeft: drawerWidth
+                        }}
+                        sx={{ flexGrow: 1,}}
                     >
                         Text To Speech
                     </Typography>
+                    <IconButton
+                        color="inherit"
+                        align="right"
+                        fontSize="large"
+                        aria-label="open drawer"
+                        sx={{
+                            marginLeft: '36px',
+                        }}
+                        onClick={() => setInfoOpen(true)}
+                    >
+                        <InfoIcon/>
+                    </IconButton>
                 </Toolbar>
             </MuiAppBar>
             <MuiDrawer
-                open={false}
-                variant="permanent"
+                open={true}
+                variant="persistent"
                 sx={{
-                    // display: {xs: 'none', sm: 'block'},
-                    // '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
+                        width: drawerWidth,
+                        boxSizing: 'border-box',
+                    },
                 }}
             >
                 <Divider/>
@@ -93,6 +118,8 @@ function DashboardContent() {
             </MuiDrawer>
             <Box
                 component="main"
+                align="center"
+                justifyContent="center"
                 sx={{
                     backgroundColor: (theme) =>
                         theme.palette.mode === 'light'
@@ -100,7 +127,6 @@ function DashboardContent() {
                             : theme.palette.grey[900],
                     flexGrow: 1,
                     height: '100vh',
-                    // overflow: 'auto',
                 }}
             >
                 <Toolbar/>
@@ -146,6 +172,7 @@ function DashboardContent() {
                     <SpeakCard voice={selectedVoice}/>
                 </Container>
             </Box>
+            <InfoModal open={infoOpen} handleClose={() => setInfoOpen(false)}/>
         </Box>
     );
 }
