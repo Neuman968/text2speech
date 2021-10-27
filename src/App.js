@@ -8,7 +8,7 @@ function App() {
 
   const colorMode = React.useContext(ColorModeContext);
 
-  const [mode, setMode] = React.useState('dark');
+  const [mode, setMode] = React.useState('light');
 
   const theme = React.useMemo(
       () =>
