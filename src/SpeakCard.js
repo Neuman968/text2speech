@@ -25,7 +25,7 @@ function SpeakCard({ voice }) {
         }
         window.addEventListener('keydown', eventListener);
         return () => window.removeEventListener('keydown', eventListener)
-    }, [message, voice]);
+    }, [message, voice, speak]);
 
     return (<Card>
         <CardContent>
