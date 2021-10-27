@@ -37,11 +37,7 @@ function DashboardContent() {
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
             <MuiAppBar position="absolute" open={open}>
-                <Toolbar
-                    sx={{
-                        pr: '24px', // keep right padding when drawer closed
-                    }}
-                >
+                <Toolbar>
                     <IconButton
                         edge="start"
                         color="inherit"
@@ -58,6 +54,7 @@ function DashboardContent() {
                         component="h1"
                         variant="h6"
                         color="inherit"
+                        align={"center"}
                         noWrap
                         sx={{flexGrow: 1}}
                     >
@@ -66,11 +63,11 @@ function DashboardContent() {
                 </Toolbar>
             </MuiAppBar>
             <MuiDrawer
-                open={open}
+                open={false}
                 variant="permanent"
                 sx={{
-                    display: {xs: 'none', sm: 'block'},
-                    '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                    // display: {xs: 'none', sm: 'block'},
+                    // '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                 }}
             >
                 <Divider/>
