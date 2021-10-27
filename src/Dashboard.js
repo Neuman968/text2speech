@@ -22,49 +22,6 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 
 const drawerWidth = 240;
 
-const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})(({theme, open}) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
-}));
-
-const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
-    ({theme, open}) => ({
-        '& .MuiDrawer-paper': {
-            whiteSpace: 'nowrap',
-            width: drawerWidth,
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            boxSizing: 'border-box',
-            ...(!open && {
-                overflowX: 'auto',
-                transition: theme.transitions.create('width', {
-                    easing: theme.transitions.easing.sharp,
-                    duration: theme.transitions.duration.leavingScreen,
-                }),
-                width: theme.spacing(7),
-                [theme.breakpoints.up('sm')]: {
-                    width: theme.spacing(9),
-                },
-            }),
-        },
-    }),
-);
-
 const avaiableVoices = speechSynthesis.getVoices()
 
 const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
@@ -80,7 +37,7 @@ function DashboardContent() {
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <AppBar position="absolute" open={open}>
+            <MuiAppBar position="absolute" open={open}>
                 <Toolbar
                     sx={{
                         pr: '24px', // keep right padding when drawer closed
@@ -108,8 +65,8 @@ function DashboardContent() {
                         Text To Speech
                     </Typography>
                 </Toolbar>
-            </AppBar>
-            <Drawer
+            </MuiAppBar>
+            <MuiDrawer
                 open={open}
                 variant="permanent"
                 sx={{
@@ -137,7 +94,7 @@ function DashboardContent() {
                         <Divider/>
                     </>)}
                 </List>
-            </Drawer>
+            </MuiDrawer>
             <Box
                 component="main"
                 sx={{
