@@ -22,7 +22,7 @@ function App() {
 
   return (<ColorModeContext.Provider value={colorMode}>
           <ThemeProvider theme={theme}>
-            <Dashboard/>
+            <Dashboard themeMode={mode} toggleThemeMode={(themeMode) => setMode(themeMode)}/>
           </ThemeProvider>
       </ColorModeContext.Provider>);
 }

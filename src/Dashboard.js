@@ -27,7 +27,7 @@ const avaiableVoices = speechSynthesis.getVoices()
 
 const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
 
-function DashboardContent() {
+function Dashboard({ toggleThemeMode, themeMode }) {
 
     const [open, setOpen] = React.useState(true);
 
@@ -172,11 +172,14 @@ function DashboardContent() {
                     <SpeakCard voice={selectedVoice}/>
                 </Container>
             </Box>
-            <InfoModal open={infoOpen} handleClose={() => setInfoOpen(false)}/>
+            <InfoModal
+                open={infoOpen}
+                handleClose={() => setInfoOpen(false)}
+                toggleThemeMode={toggleThemeMode}
+                themeMode={themeMode}
+            />
         </Box>
     );
 }
 
-export default function Dashboard() {
-    return <DashboardContent/>;
-}
+export default Dashboard
