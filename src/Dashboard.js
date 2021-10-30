@@ -10,22 +10,18 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import SpeakCard from "./SpeakCard";
-import {Avatar, Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent, CardHeader} from "@mui/material";
 import {RandomAvatar} from "./RandomAvatar";
-import FlagIcon from "./FlagIcon";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 import InfoIcon from '@mui/icons-material/Info';
 import InfoModal from "./InfoModal";
+import VoiceListItemSelection from "./VoiceListItemSelection";
 
 const drawerWidth = 240;
 
 const avaiableVoices = speechSynthesis.getVoices()
 
-const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
+export const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
 
 function Dashboard({ toggleThemeMode, themeMode }) {
 
@@ -98,20 +94,10 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                 <Divider/>
                 <List>
                     {avaiableVoices.map((voice) => <>
-                        <ListItem onClick={() => (setSelectedVoice(voice))}>
-                            <ListItemIcon>
-                                <Avatar>
-                                    <RandomAvatar seed={computeHexSeed(voice.name)}/>
-                                </Avatar>
-                            </ListItemIcon>
-                            <ListItemText
-                                primary={voice.name}
-                                secondary={voice.lang}
-                            />
-                            <ListItemAvatar>
-                                <FlagIcon lang={voice.lang}/>
-                            </ListItemAvatar>
-                        </ListItem>
+                        <VoiceListItemSelection
+                            voice={voice}
+                            setSelectedVoice={setSelectedVoice}
+                        />
                         <Divider/>
                     </>)}
                 </List>
