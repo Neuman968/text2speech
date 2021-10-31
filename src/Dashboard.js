@@ -11,7 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import SpeakCard from "./SpeakCard";
-import {Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent, CardHeader, useMediaQuery} from "@mui/material";
+import { useTheme } from '@mui/material/styles';
 import {RandomAvatar} from "./RandomAvatar";
 import InfoIcon from '@mui/icons-material/Info';
 import InfoModal from "./InfoModal";
@@ -25,8 +26,11 @@ export const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString(
 
 function Dashboard({ toggleThemeMode, themeMode }) {
 
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
+    const theme = useTheme()
+
+    const matches = useMediaQuery(theme.breakpoints.down('md'))
 
     const [ infoOpen, setInfoOpen ] = React.useState(false)
 
@@ -80,8 +84,8 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                 </Toolbar>
             </MuiAppBar>
             <MuiDrawer
-                open={true}
-                variant="persistent"
+                open={open}
+                variant={matches ? "temporary" : "permanent"}
                 sx={{
                     width: drawerWidth,
                     flexShrink: 0,
@@ -90,6 +94,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                         boxSizing: 'border-box',
                     },
                 }}
+                onClose={toggleDrawer}
             >
                 <Divider/>
                 <List>
