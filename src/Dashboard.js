@@ -72,7 +72,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                         }}
                         sx={{ flexGrow: 1,}}
                     >
-                        Text To Speech
+                        { !isMobile && <>Text To Speech</> }
                     </Typography>
                     <IconButton
                         color="inherit"
