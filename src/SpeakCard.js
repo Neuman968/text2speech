@@ -1,7 +1,21 @@
 import React from 'react'
 import {Button, Card, CardContent, TextareaAutosize} from "@mui/material";
 import Box from "@mui/material/Box";
-import { useTheme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
+
+const TextArea = styled(TextareaAutosize, {})(({ theme }) => ({
+    [theme.breakpoints.only('sm')]: {
+        width: 200,
+    },
+    [theme.breakpoints.up('sm')]: {
+        width: 400,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 600,
+    },
+    backgroundColor: theme.palette.mode === 'dark' ? '#212121' : '#fff',
+    color: theme.palette.mode === 'dark' ? 'white' : 'black'
+}))
 
 function SpeakCard({ voice, isMobile }) {
 
@@ -30,14 +44,9 @@ function SpeakCard({ voice, isMobile }) {
     return (<Card>
         <CardContent>
             <Box display="flex" flexDirection={'column'}>
-                <TextareaAutosize
+                <TextArea
                     minRows={10}
                     onChange={(e) => setMessage(e.target.value)}
-                    style={{
-                        width: isMobile ? 200 : 600,
-                        backgroundColor: theme.palette.mode === 'dark' ? '#212121' : '#fff',
-                        color: theme.palette.mode === 'dark' ? 'white' : 'black'
-                    }}
                 />
                 <Button
                     variant="contained"
