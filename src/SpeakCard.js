@@ -13,6 +13,7 @@ const TextArea = styled(TextareaAutosize, {})(({ theme }) => ({
     [theme.breakpoints.up('md')]: {
       width: 600,
     },
+    fontSize: '16px',
     backgroundColor: theme.palette.mode === 'dark' ? '#212121' : '#fff',
     color: theme.palette.mode === 'dark' ? 'white' : 'black'
 }))
@@ -41,12 +42,16 @@ function SpeakCard({ voice, isMobile }) {
         return () => window.removeEventListener('keydown', eventListener)
     }, [message, voice, speak]);
 
+    const textAreaOnChanged = (e) => {
+        e.preventDefault()
+        setMessage(e.target.value)
+    }
     return (<Card>
         <CardContent>
             <Box display="flex" flexDirection={'column'}>
                 <TextArea
                     minRows={10}
-                    onChange={(e) => setMessage(e.target.value)}
+                    onChange={textAreaOnChanged}
                 />
                 <Button
                     variant="contained"
