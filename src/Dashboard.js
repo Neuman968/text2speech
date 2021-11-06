@@ -40,6 +40,11 @@ function Dashboard({ toggleThemeMode, themeMode }) {
 
     const [selectedVoice, setSelectedVoice] = React.useState(avaiableVoices[0])
 
+    const onSelectedVoiceChange = (voice) => {
+        setSelectedVoice(voice)
+        toggleDrawer()
+    }
+
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
@@ -101,7 +106,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                     {avaiableVoices.map((voice) => <>
                         <VoiceListItemSelection
                             voice={voice}
-                            setSelectedVoice={setSelectedVoice}
+                            onSelectedVoiceChange={onSelectedVoiceChange}
                         />
                         <Divider/>
                     </>)}

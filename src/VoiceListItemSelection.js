@@ -8,8 +8,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import FlagIcon from "./FlagIcon";
 import {computeHexSeed} from "./Dashboard";
 
-function VoiceListItemSelection({ voice, setSelectedVoice }) {
-    return (<ListItem onClick={() => (setSelectedVoice(voice))}>
+function VoiceListItemSelection({ voice, onSelectedVoiceChange }) {
+    return (<ListItem onClick={() => (onSelectedVoiceChange(voice))}>
         <ListItemIcon>
             <Avatar>
                 <RandomAvatar seed={computeHexSeed(voice.name)}/>
