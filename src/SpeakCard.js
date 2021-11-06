@@ -3,7 +3,7 @@ import {Button, Card, CardContent, TextareaAutosize} from "@mui/material";
 import Box from "@mui/material/Box";
 import { useTheme } from '@mui/material/styles';
 
-function SpeakCard({ voice }) {
+function SpeakCard({ voice, isMobile }) {
 
     const theme = useTheme()
 
@@ -34,7 +34,7 @@ function SpeakCard({ voice }) {
                     minRows={10}
                     onChange={(e) => setMessage(e.target.value)}
                     style={{
-                        width: 600,
+                        width: isMobile ? 200 : 600,
                         backgroundColor: theme.palette.mode === 'dark' ? '#212121' : '#fff',
                         color: theme.palette.mode === 'dark' ? 'white' : 'black'
                     }}

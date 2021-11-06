@@ -30,7 +30,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
 
     const theme = useTheme()
 
-    const matches = useMediaQuery(theme.breakpoints.down('md'))
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
     const [ infoOpen, setInfoOpen ] = React.useState(false)
 
@@ -85,7 +85,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
             </MuiAppBar>
             <MuiDrawer
                 open={open}
-                variant={matches ? "temporary" : "permanent"}
+                variant={isMobile ? "temporary" : "permanent"}
                 sx={{
                     width: drawerWidth,
                     flexShrink: 0,
@@ -160,7 +160,10 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                         justifyContent: 'center',
                     }}
                 >
-                    <SpeakCard voice={selectedVoice}/>
+                    <SpeakCard
+                        voice={selectedVoice}
+                        isMobile={isMobile}
+                    />
                 </Container>
             </Box>
             <InfoModal
