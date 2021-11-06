@@ -75,7 +75,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                         fontSize="large"
                         aria-label="open drawer"
                         sx={{
-                            marginLeft: '36px',
+                            marginLeft: '30',
                         }}
                         onClick={() => setInfoOpen(true)}
                     >
