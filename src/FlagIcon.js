@@ -12,7 +12,7 @@ function FlagIcon({ lang }) {
     const parsedLang = lang ? lang.split('-')[1].substr(0, 2) : 'US'
     return <Avatar>
         <Icon>
-            <img src={flagSvgs[parsedLang] || flagSvgs['US']}/>
+            <img alt={`${parsedLang} icon`} src={flagSvgs[parsedLang] || flagSvgs['US']}/>
         </Icon>
     </Avatar>
 }

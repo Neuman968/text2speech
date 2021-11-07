@@ -27,7 +27,7 @@ function App() {
             <Dashboard
                 themeMode={mode}
                 toggleThemeMode={(themeMode) => setMode(themeMode)}
-                availableVoices={[]}
+                availableVoices={availableVoices}
             />
           </ThemeProvider>
       </ColorModeContext.Provider>);

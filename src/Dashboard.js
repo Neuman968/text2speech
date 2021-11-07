@@ -167,10 +167,7 @@ function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
                                 justifyContent: 'center',
                             }}
                         >
-                            <SpeakCard
-                                voice={selectedVoice}
-                                isMobile={isMobile}
-                            />
+                            <SpeakCard voice={selectedVoice}/>
                         </Container>
                     </>
                 }

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import {Button, Card, CardContent, TextareaAutosize} from "@mui/material";
 import Box from "@mui/material/Box";
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 const TextArea = styled(TextareaAutosize, {})(({ theme }) => ({
     [theme.breakpoints.only('sm')]: {
@@ -18,17 +18,15 @@ const TextArea = styled(TextareaAutosize, {})(({ theme }) => ({
     color: theme.palette.mode === 'dark' ? 'white' : 'black'
 }))
 
-function SpeakCard({ voice, isMobile }) {
-
-    const theme = useTheme()
+function SpeakCard({ voice }) {
 
     const [message, setMessage] = React.useState('')
 
-    const speak = (text) => {
+    const speak = useCallback((text) => {
         const utterance = new SpeechSynthesisUtterance(text)
         utterance.voice = voice
         speechSynthesis.speak(utterance)
-    }
+    }, [voice])
 
     // Speak on Enter press.
     React.useEffect(() => {
