@@ -4,6 +4,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
+const availableVoices = speechSynthesis.getVoices()
+
 function App() {
 
   const colorMode = React.useContext(ColorModeContext);
@@ -22,7 +24,11 @@ function App() {
 
   return (<ColorModeContext.Provider value={colorMode}>
           <ThemeProvider theme={theme}>
-            <Dashboard themeMode={mode} toggleThemeMode={(themeMode) => setMode(themeMode)}/>
+            <Dashboard
+                themeMode={mode}
+                toggleThemeMode={(themeMode) => setMode(themeMode)}
+                availableVoices={availableVoices}
+            />
           </ThemeProvider>
       </ColorModeContext.Provider>);
 }

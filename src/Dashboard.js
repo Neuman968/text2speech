@@ -20,11 +20,9 @@ import VoiceListItemSelection from "./VoiceListItemSelection";
 
 const drawerWidth = 240;
 
-const availableVoices = speechSynthesis.getVoices()
-
 export const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
 
-function Dashboard({ toggleThemeMode, themeMode }) {
+function Dashboard({ availableVoices, toggleThemeMode, themeMode }) {
 
     const [open, setOpen] = React.useState(false);
 
@@ -136,7 +134,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                         display: 'flex',
                         justifyContent: 'center',
                     }}
-                >
+                >{ availableVoices.length === 0 ? <Typography>Your browser does not support text To speech</Typography> :
                     <Card>
                         <CardHeader
                             align="center"
@@ -157,6 +155,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
                             </Typography>
                         </CardContent>
                     </Card>
+                }
                 </Container>
                 <Container
                     maxWidth="lg"
