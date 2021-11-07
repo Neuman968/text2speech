@@ -20,7 +20,7 @@ import VoiceListItemSelection from "./VoiceListItemSelection";
 
 const drawerWidth = 240;
 
-const avaiableVoices = speechSynthesis.getVoices()
+const availableVoices = speechSynthesis.getVoices()
 
 export const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
 
@@ -38,7 +38,9 @@ function Dashboard({ toggleThemeMode, themeMode }) {
         setOpen(!open);
     };
 
-    const [selectedVoice, setSelectedVoice] = React.useState(avaiableVoices[0])
+    const [ initialVoice ] = availableVoices
+
+    const [selectedVoice, setSelectedVoice] = React.useState(initialVoice)
 
     const onSelectedVoiceChange = (voice) => {
         setSelectedVoice(voice)
@@ -103,7 +105,7 @@ function Dashboard({ toggleThemeMode, themeMode }) {
             >
                 <Divider/>
                 <List>
-                    {avaiableVoices.map((voice) => <>
+                    {availableVoices.map((voice) => <>
                         <VoiceListItemSelection
                             voice={voice}
                             onSelectedVoiceChange={onSelectedVoiceChange}
