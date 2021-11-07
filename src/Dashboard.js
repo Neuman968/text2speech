@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import SpeakCard from "./SpeakCard";
 import {Card, CardContent, CardHeader, useMediaQuery} from "@mui/material";
-import { useTheme } from '@mui/material/styles';
+import {useTheme} from '@mui/material/styles';
 import {RandomAvatar} from "./RandomAvatar";
 import InfoIcon from '@mui/icons-material/Info';
 import InfoModal from "./InfoModal";
@@ -22,7 +22,7 @@ const drawerWidth = 240;
 
 export const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
 
-function Dashboard({ availableVoices, toggleThemeMode, themeMode }) {
+function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
 
     const [open, setOpen] = React.useState(false);
 
@@ -30,13 +30,13 @@ function Dashboard({ availableVoices, toggleThemeMode, themeMode }) {
 
     const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
-    const [ infoOpen, setInfoOpen ] = React.useState(false)
+    const [infoOpen, setInfoOpen] = React.useState(false)
 
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
-    const [ initialVoice ] = availableVoices
+    const [initialVoice] = availableVoices
 
     const [selectedVoice, setSelectedVoice] = React.useState(initialVoice)
 
@@ -70,9 +70,9 @@ function Dashboard({ availableVoices, toggleThemeMode, themeMode }) {
                         style={{
                             paddingLeft: drawerWidth
                         }}
-                        sx={{ flexGrow: 1,}}
+                        sx={{flexGrow: 1,}}
                     >
-                        { !isMobile && <>Text To Speech</> }
+                        {!isMobile && <>Text To Speech</>}
                     </Typography>
                     <IconButton
                         color="inherit"
@@ -126,51 +126,54 @@ function Dashboard({ availableVoices, toggleThemeMode, themeMode }) {
                 }}
             >
                 <Toolbar/>
-                <Container
-                    maxWidth="lg"
-                    sx={{
-                        mt: 4,
-                        mb: 4,
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                >{ availableVoices.length === 0 ? <Typography>Your browser does not support text To speech</Typography> :
-                    <Card>
-                        <CardHeader
-                            align="center"
-                            avatar={
-                                <RandomAvatar
-                                    style={{
-                                        height: '160px',
-                                        width: '160px',
-                                        justifyContent: 'center',
-                                    }}
-                                    seed={computeHexSeed(selectedVoice.name)}
+                {availableVoices.length === 0 ?
+                    <Typography>Your browser does not support text To Speech</Typography> : <>
+                        <Container
+                            maxWidth="lg"
+                            sx={{
+                                mt: 4,
+                                mb: 4,
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <Card>
+                                <CardHeader
+                                    align="center"
+                                    avatar={
+                                        <RandomAvatar
+                                            style={{
+                                                height: '160px',
+                                                width: '160px',
+                                                justifyContent: 'center',
+                                            }}
+                                            seed={computeHexSeed(selectedVoice.name)}
+                                        />
+                                    }
                                 />
-                            }
-                        />
-                        <CardContent>
-                            <Typography align="center">
-                                Speaking as {selectedVoice.name}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                                <CardContent>
+                                    <Typography align="center">
+                                        Speaking as {selectedVoice.name}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Container>
+                        <Container
+                            maxWidth="lg"
+                            sx={{
+                                mt: 4,
+                                mb: 4,
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <SpeakCard
+                                voice={selectedVoice}
+                                isMobile={isMobile}
+                            />
+                        </Container>
+                    </>
                 }
-                </Container>
-                <Container
-                    maxWidth="lg"
-                    sx={{
-                        mt: 4,
-                        mb: 4,
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <SpeakCard
-                        voice={selectedVoice}
-                        isMobile={isMobile}
-                    />
-                </Container>
             </Box>
             <InfoModal
                 open={infoOpen}
