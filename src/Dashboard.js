@@ -103,13 +103,14 @@ function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
             >
                 <Divider/>
                 <List>
-                    {availableVoices.map((voice) => <>
+                    {availableVoices.map((voice) => <React.Fragment key={voice.name}>
                         <VoiceListItemSelection
+                            key={voice.name}
                             voice={voice}
                             onSelectedVoiceChange={onSelectedVoiceChange}
                         />
                         <Divider/>
-                    </>)}
+                    </React.Fragment>)}
                 </List>
             </MuiDrawer>
             <Box
