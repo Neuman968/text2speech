@@ -128,7 +128,7 @@ function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
             >
                 <Toolbar/>
                 {availableVoices.length === 0 ?
-                    <Typography>Your browser does not support text To Speech</Typography> : <>
+                    <Typography>Your browser does not support text to speech</Typography> : <>
                         <Container
                             maxWidth="lg"
                             sx={{
