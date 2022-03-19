@@ -36,9 +36,12 @@ function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
         setOpen(!open);
     };
 
-    const [initialVoice] = availableVoices
-
+    const [initialVoice] = availableVoices.voices
     const [selectedVoice, setSelectedVoice] = React.useState(initialVoice)
+
+    if (!selectedVoice && initialVoice) {
+        setSelectedVoice(initialVoice)
+    }
 
     const onSelectedVoiceChange = (voice) => {
         setSelectedVoice(voice)
@@ -103,7 +106,7 @@ function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
             >
                 <Divider/>
                 <List>
-                    {availableVoices.map((voice) => <React.Fragment key={voice.name}>
+                    {availableVoices.voices.map((voice) => <React.Fragment key={voice.name}>
                         <VoiceListItemSelection
                             key={voice.name}
                             voice={voice}
@@ -127,7 +130,7 @@ function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
                 }}
             >
                 <Toolbar/>
-                {availableVoices.length === 0 ?
+                {availableVoices.voices.length === 0 || null === selectedVoice || undefined === selectedVoice ?
                     <Typography>Your browser does not support text to speech</Typography> : <>
                         <Container
                             maxWidth="lg"
