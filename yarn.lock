@@ -2646,10 +2646,10 @@
     csstype "^3.1.3"
     prop-types "^15.8.1"
 
-"@mui/styled-engine@^6.1.1":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@mui/styled-engine/-/styled-engine-6.1.1.tgz#f75c39ed94eff3c8d5ef1d5deedd996b9f02273d"
-  integrity sha512-HJyIoMpFb11fnHuRtUILOXgq6vj4LhIlE8maG4SwP/W+E5sa7HFexhnB3vOMT7bKys4UKNxhobC8jwWxYilGsA==
+"@mui/styled-engine@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@mui/styled-engine/-/styled-engine-6.1.2.tgz#bef156ac2e47a67d49982ddb5fa4211974740a26"
+  integrity sha512-uKOfWkR23X39xj7th2nyTcCHqInTAXtUnqD3T5qRVdJcOPvu1rlgTleTwJC/FJvWZJBU6ieuTWDhbcx5SNViHQ==
   dependencies:
     "@babel/runtime" "^7.25.6"
     "@emotion/cache" "^11.13.1"
