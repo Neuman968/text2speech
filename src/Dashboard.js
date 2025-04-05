@@ -20,7 +20,7 @@ import VoiceListItemSelection from "./VoiceListItemSelection";
 
 const drawerWidth = 240;
 
-export const computeHexSeed = (voiceName) => (`${new Buffer(voiceName).toString()}-${Date.now()}`).toString('hex')
+export const computeHexSeed = (str) => str.split('').map(char => char.charCodeAt(0).toString(16)).join('');
 
 function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
 
