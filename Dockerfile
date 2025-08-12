@@ -5,7 +5,7 @@ RUN yarn
 COPY . ./
 RUN yarn build
 
-FROM nginx:1.27-alpine
+FROM nginx:1.29-alpine
 
 COPY nginx-rewrite.conf /etc/nginx/conf.d/default.conf
 COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
