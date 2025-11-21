@@ -32,21 +32,28 @@ function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
 
     const [infoOpen, setInfoOpen] = React.useState(false)
 
-    const toggleDrawer = () => {
+    const toggleDrawer = React.useCallback(() => {
         setOpen(!open);
-    };
+    }, [open]);
 
     const [initialVoice] = availableVoices.voices
     const [selectedVoice, setSelectedVoice] = React.useState(initialVoice)
 
-    if (!selectedVoice && initialVoice) {
-        setSelectedVoice(initialVoice)
-    }
+    React.useEffect(() => {
+        if (!selectedVoice && initialVoice) {
+            setSelectedVoice(initialVoice)
+        }
+    }, [selectedVoice, initialVoice])
 
-    const onSelectedVoiceChange = (voice) => {
+    const onSelectedVoiceChange = React.useCallback((voice) => {
         setSelectedVoice(voice)
         toggleDrawer()
-    }
+    }, [toggleDrawer])
+
+    const selectedVoiceHexSeed = React.useMemo(() => 
+        selectedVoice ? computeHexSeed(selectedVoice.name) : '',
+        [selectedVoice]
+    )
 
     return (
         <Box sx={{display: 'flex'}}>
@@ -151,7 +158,7 @@ function Dashboard({availableVoices, toggleThemeMode, themeMode}) {
                                                 width: '160px',
                                                 justifyContent: 'center',
                                             }}
-                                            seed={computeHexSeed(selectedVoice.name)}
+                                            seed={selectedVoiceHexSeed}
                                         />
                                     }
                                 />

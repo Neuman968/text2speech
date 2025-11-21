@@ -8,13 +8,17 @@ const flagSvgs = reqSvgs.keys().reduce((images, path) => {
     return images
 }, {})
 
-function FlagIcon({ lang }) {
-    const parsedLang = lang ? lang.split('-')[1].substr(0, 2) : 'US'
+const FlagIcon = React.memo(({ lang }) => {
+    const parsedLang = React.useMemo(() => 
+        lang ? lang.split('-')[1].substr(0, 2) : 'US',
+        [lang]
+    )
+    
     return <Avatar>
         <Icon>
             <img alt={`${parsedLang} icon`} src={flagSvgs[parsedLang] || flagSvgs['US']}/>
         </Icon>
     </Avatar>
-}
+})
 
 export default FlagIcon
