@@ -8,11 +8,17 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import FlagIcon from "./FlagIcon";
 import {computeHexSeed} from "./Dashboard";
 
-function VoiceListItemSelection({ voice, onSelectedVoiceChange }) {
-    return (<ListItem onClick={() => (onSelectedVoiceChange(voice))}>
+const VoiceListItemSelection = React.memo(({ voice, onSelectedVoiceChange }) => {
+    const hexSeed = React.useMemo(() => computeHexSeed(voice.name), [voice.name])
+    
+    const handleClick = React.useCallback(() => {
+        onSelectedVoiceChange(voice)
+    }, [voice, onSelectedVoiceChange])
+    
+    return (<ListItem onClick={handleClick}>
         <ListItemIcon>
             <Avatar>
-                <RandomAvatar seed={computeHexSeed(voice.name)}/>
+                <RandomAvatar seed={hexSeed}/>
             </Avatar>
         </ListItemIcon>
         <ListItemText
@@ -23,5 +29,6 @@ function VoiceListItemSelection({ voice, onSelectedVoiceChange }) {
             <FlagIcon lang={voice.lang}/>
         </ListItemAvatar>
     </ListItem>)
-}
+})
+
 export default VoiceListItemSelection

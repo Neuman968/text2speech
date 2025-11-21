@@ -1,4 +1,5 @@
 import Avatar from 'avataaars'
+import React from 'react'
 
 const Avataaar = props => (
     <Avatar
@@ -7,17 +8,23 @@ const Avataaar = props => (
     />
 )
 
-export const RandomAvatar = (props) => {
-    const items = props.seed.match(/.{1,2}/g).map(e => parseInt(e, 16))
-    const options = { }
-    const keys = [...configsKeys]
+export const RandomAvatar = React.memo((props) => {
+    const options = React.useMemo(() => {
+        const items = props.seed.match(/.{1,2}/g).map(e => parseInt(e, 16))
+        const result = { }
+        const keys = [...configsKeys]
 
-    keys.map((e, i) => Object.assign(options, {[e]: configs[e][items[i] % configs[e].length]}))
+        keys.forEach((e, i) => {
+            result[e] = configs[e][items[i] % configs[e].length]
+        })
+
+        return result
+    }, [props.seed])
 
     return (
         <Avataaar {...options} {...props}/>
     )
-}
+})
 
 const configs = {
     topType: [
