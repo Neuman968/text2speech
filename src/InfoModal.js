@@ -57,7 +57,15 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-function InfoModal({ open, handleClose, themeMode, toggleThemeMode }) {
+const InfoModal = React.memo(({ open, handleClose, themeMode, toggleThemeMode }) => {
+    const handleThemeChange = React.useCallback(() => {
+        toggleThemeMode(themeMode === 'light' ? 'dark' : 'light')
+    }, [themeMode, toggleThemeMode])
+
+    const handleGithubClick = React.useCallback(() => {
+        window.location.href = "https://github.com/Neuman968"
+    }, [])
+
     return (<Dialog
         onClose={handleClose}
         open={open}
@@ -73,12 +81,12 @@ function InfoModal({ open, handleClose, themeMode, toggleThemeMode }) {
             </Typography>
             <Typography variant="p" component="h5">
                 { themeMode === 'dark' ? <>Light Mode</> : <>Dark Mode</> }
-                <MaterialUISwitch sx={{ m: 1 }} checked={themeMode === 'light'} onChange={() => toggleThemeMode(themeMode === 'light' ? 'dark' : 'light')} />
+                <MaterialUISwitch sx={{ m: 1 }} checked={themeMode === 'light'} onChange={handleThemeChange} />
             </Typography>
 
             <Typography>
                 View the source code
-                <IconButton onClick={() => window.location.href = "https://github.com/Neuman968"}>
+                <IconButton onClick={handleGithubClick}>
                     <GitHubIcon/>
                 </IconButton>
             </Typography>
@@ -95,6 +103,6 @@ function InfoModal({ open, handleClose, themeMode, toggleThemeMode }) {
         {/*    </Typography>*/}
         {/*</Box>*/}
     </Dialog>)
-}
+})
 
 export default InfoModal

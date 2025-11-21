@@ -18,7 +18,7 @@ const TextArea = styled(TextareaAutosize, {})(({ theme }) => ({
     color: theme.palette.mode === 'dark' ? 'white' : 'black'
 }))
 
-function SpeakCard({ voice }) {
+const SpeakCard = React.memo(({ voice }) => {
 
     const [message, setMessage] = React.useState('')
 
@@ -38,12 +38,12 @@ function SpeakCard({ voice }) {
         }
         window.addEventListener('keydown', eventListener);
         return () => window.removeEventListener('keydown', eventListener)
-    }, [message, voice, speak]);
+    }, [message, speak]);
 
-    const textAreaOnChanged = (e) => {
+    const textAreaOnChanged = useCallback((e) => {
         e.preventDefault()
         setMessage(e.target.value)
-    }
+    }, [])
     return (<Card>
         <CardContent>
             <Box display="flex" flexDirection={'column'}>
@@ -58,6 +58,6 @@ function SpeakCard({ voice }) {
             </Box>
         </CardContent>
     </Card>)
-}
+})
 
 export default SpeakCard
